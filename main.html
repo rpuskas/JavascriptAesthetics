@@ -1,0 +1,24 @@
+<html>
+<head>
+<script src="jquery-1.6.3.js"></script>
+<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+<script src="jquery.tmpl.js" type="text/javascript"></script>
+<script src="main.js"></script>
+</head>
+<body>
+	<div id='parent'>
+		<div><label for="parent-name">Name:</label><input type="text" id="parent-name" value='ryan'/></div>
+		<div><label for="parent-age" >Age:</label><input type="text" id="parent-age" value='33'/></div>
+		<input id='parent-create' type='button' value='create'/>
+	</div>
+	
+	<div id='parents'>
+	</div>
+	
+<script id='parentsTemplate' type="text/html">
+	<label>${name} ${age}</label><br>
+</script>
+
+</body>
+</html>
+
