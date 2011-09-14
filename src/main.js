@@ -24,6 +24,13 @@ function Parents(parents){
 		list : function(){
 			//Test: does this allow for the collection to be modified outside the bounds of the Parents function? 
 			return _parents;
+		},
+		totalYears : function(){	
+			var total = 0;
+			$.each(_parents, function(){
+				total += parseInt(this.age);
+			});
+			return total;
 		}
 	}
 };
@@ -51,7 +58,7 @@ jQuery(document).ready(function(){
 		
 		parents.add( Parent(name,age) );
 		
-		renderTemplate("#parents","#parentsTemplate",parents.list());
+		renderTemplate("#parents","#parentsTemplate",parents);
 	})
 	
 });
