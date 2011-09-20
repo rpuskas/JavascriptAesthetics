@@ -1,28 +1,49 @@
-function Parent(x,y){
+function Parent(name,age,id){
+	var name = name || '- not entered -';
+	var age = age || 0; 
 	return {
-		name: x,
-		age: y,
+		id: id,
+		name: name,
+		age: age,
 		
 		toString : function(){
-			return x + y;
+			return name + age;
 		}
 		
 	}
 };
 
+function IdGenerator(){
+	var i = 0;
+	return {
+		next : function(){
+			return ++i;
+		}
+	}
+}
+
 function Parents(parents){
 	
-	//Test: if parents is passed in empty, then _parents should be initialized to an array. otherwise push will be undefined
-	var _parents = parents;
+	var _parents = parents || [];
+	var getIndex = function(parentId){
+		for(i = 0;i<_parents.length;++i){
+			if(_parents[i].id == parentId){
+				return i;
+			}
+		}
+	}
 	return {
 		
-		//Test if adding a parent, general stuff that it is added to the collection
 		add : function(parent){
 			_parents.push(parent);
 		},
 		
+		remove : function(id){
+			var indexToRemove = getIndex(id);
+			_parents = _parents.slice(0,indexToRemove).concat( _parents.slice(indexToRemove+1)  )
+		},
+		
 		list : function(){
-			//Test: does this allow for the collection to be modified outside the bounds of the Parents function? 
 			return _parents;
 		},
 		totalYears : function(){	
@@ -51,14 +72,26 @@ jQuery(document).ready(function(){
 
 	//Very little to test at this level: if it is not pulled out of the load, probably not worth testing
 	var parents = Parents([]);
+	var generator = new IdGenerator();
+	$('#add-children').hide();
 	$('#parent-create').click(function(){
 
 		var name = $('#parent-name').val();
 		var age  = $('#parent-age').val();
 		
-		parents.add( Parent(name,age) );
-		
+		parents.add( Parent(name,age,generator.next()) );
 		renderTemplate("#parents","#parentsTemplate",parents);
-	})
+	});
+	
+	$('#next').click(function(){
+		$('#add-parents').hide();
+		$('#add-children').show();
+	});
+	
+	$('.removeParent').live('click', function() {
+		var parentId = $(this).attr('id').split('_')[1];
+		parents.remove(parentId);
+		renderTemplate("#parents","#parentsTemplate",parents);
+	});
 	
 });

@@ -1,0 +1,23 @@
+.entity{
+	width:300px;
+}
+
+#parents{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+#parents table td, table th {
+	text-align: left;
+	width: 500px;
+	border: 1px solid black;
+}
+
+#parents table th{
+	background-color: lightGrey;
+}
+
+.entity input{
+	width: 100px;
+	margin-bottom: 10px;
+}
