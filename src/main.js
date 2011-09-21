@@ -4,21 +4,18 @@ jQuery(document).ready(function(){
 	var generator = new IdGenerator();
 	$('#add-persons').hide();
 	
-	$('#person-add').live('click',function(){
-
-		var name = $('#person-name').val();
-		console.log(name);
-		var experience  = $('#person-experience').val();
-		
-		team.add( Person(name,experience,generator.next()) );
-		renderTemplate("#persons","#personsTemplate",team);
-	});
-	
 	$('#next-add-people').click(function(){
 		team.setName($("#team-name").val());
 		$('#add-team').hide();
 		renderTemplate("#persons","#personsTemplate",team);
 		$('#add-persons').show();
+	});
+	
+	$('#person-add').live('click',function(){
+		var name = $('#person-name').val();
+		var experience  = $('#person-experience').val();
+		team.add( Person(name,experience,generator.next()) );
+		renderTemplate("#persons","#personsTemplate",team);
 	});
 	
 	$('#back-add-team').live('click',function(){

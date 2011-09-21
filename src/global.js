@@ -8,8 +8,6 @@ function IdGenerator(){
 }
 
 function renderTemplate(container,template,collection){
-	
 	$(container).empty()
 	$(template).tmpl(collection).appendTo(container);
-	
 };

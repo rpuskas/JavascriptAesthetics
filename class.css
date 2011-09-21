@@ -7,6 +7,10 @@
 	margin-bottom:10px;
 }
 
+marquee {
+	font-size: 2em;
+}
+
 #persons table td, table th {
 	text-align: left;
 	width: 500px;
