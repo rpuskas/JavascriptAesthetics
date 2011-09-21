@@ -77,6 +77,7 @@ jQuery(document).ready(function(){
 	$('#person-add').live('click',function(){
 
 		var name = $('#person-name').val();
+		console.log(name);
 		var experience  = $('#person-experience').val();
 		
 		team.add( Person(name,experience,generator.next()) );

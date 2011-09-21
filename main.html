@@ -21,7 +21,6 @@
 		
 </body>
 
-
 <script id="personsTemplate" type="text/html">
 	<div id='add-persons'>
 		<h3>Add People to ${$data.getName()}</h3>
@@ -45,7 +44,7 @@
 			{{each $data.people()}} 
 			<tr>
 				<td>
-					${$value.getName()}
+					${$value.name}
 				</td>
 				<td>
 					${$value.experience}
@@ -56,6 +55,7 @@
 			</tr>
 			{{/each}}
 		</table>
+		<label>Total years of experience: ${$data.totalExperience()}</label><br><br>
 		<input type='button' id='back-add-team' value='back'>
     </div>
 </script>
