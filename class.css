@@ -1,5 +1,5 @@
 .entity{
-	width:300px;
+	width:350px;
 }
 
 #parents{
@@ -20,4 +20,5 @@
 .entity input{
 	width: 100px;
 	margin-bottom: 10px;
+	margin-left: 5px;
 }

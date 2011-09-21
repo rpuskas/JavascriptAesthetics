@@ -1,15 +1,54 @@
-function Parent(name,age,id){
+function Person(name,experience,id){
 	var name = name || '- not entered -';
-	var age = age || 0; 
+	var experience = experience || 0; 
 	return {
 		id: id,
 		name: name,
-		age: age,
+		experience: experience,
 		
 		toString : function(){
-			return name + age;
+			return name + experience;
 		}
 		
+	}
+};
+
+function Team(persons){
+	
+	var _persons = persons || [];
+	var _name = 'team name not entered';
+	var getIndex = function(personId){
+		for(i = 0;i<_persons.length;++i){
+			if(_persons[i].id == personId){
+				return i;
+			}
+		}
+	}
+	return {
+		setName : function(name){
+			_name = name;
+		},
+		getName : function(){
+			return _name;
+		},
+		
+		add : function(person){
+			_persons.push(person);
+		},
+		remove : function(id){
+			var indexToRemove = getIndex(id);
+			_persons = _persons.slice(0,indexToRemove).concat( _persons.slice(indexToRemove+1)  )
+		},
+		people : function(){
+			return _persons;
+		},
+		totalExperience : function(){	
+			var total = 0;
+			$.each(_persons, function(){
+				total += parseInt(this.experience);
+			});
+			return total;
+		}
 	}
 };
 
@@ -22,76 +61,45 @@ function IdGenerator(){
 	}
 }
 
-function Parents(parents){
-	
-	var _parents = parents || [];
-	var getIndex = function(parentId){
-		for(i = 0;i<_parents.length;++i){
-			if(_parents[i].id == parentId){
-				return i;
-			}
-		}
-	}
-	return {
-		
-		add : function(parent){
-			_parents.push(parent);
-		},
-		
-		remove : function(id){
-			var indexToRemove = getIndex(id);
-			_parents = _parents.slice(0,indexToRemove).concat( _parents.slice(indexToRemove+1)  )
-		},
-		
-		list : function(){
-			return _parents;
-		},
-		totalYears : function(){	
-			var total = 0;
-			$.each(_parents, function(){
-				total += parseInt(this.age);
-			});
-			return total;
-		}
-	}
-};
-
-//Note!: important to keep the references to the collections out of the javascript. otherwise, the identities of the 
-//		 view will leak into the tests causing them to be brittle and break unnecessarily
 function renderTemplate(container,template,collection){
 	
-	//Test: should always set the collection to empty first to prevent duplication of information in the template
 	$(container).empty()
-	
-	//Test: will be difficult, but some how make sure that this is rendered. perhaps not worth it
 	$(template).tmpl(collection).appendTo(container);
 	
 };
 
 jQuery(document).ready(function(){
 
-	//Very little to test at this level: if it is not pulled out of the load, probably not worth testing
-	var parents = Parents([]);
+	var team = Team([]);
 	var generator = new IdGenerator();
-	$('#add-children').hide();
-	$('#parent-create').click(function(){
+	$('#add-persons').hide();
+	
+	$('#person-add').live('click',function(){
 
-		var name = $('#parent-name').val();
-		var age  = $('#parent-age').val();
+		var name = $('#person-name').val();
+		var experience  = $('#person-experience').val();
 		
-		parents.add( Parent(name,age,generator.next()) );
-		renderTemplate("#parents","#parentsTemplate",parents);
+		team.add( Person(name,experience,generator.next()) );
+		renderTemplate("#persons","#personsTemplate",team);
 	});
 	
-	$('#next').click(function(){
-		$('#add-parents').hide();
-		$('#add-children').show();
+	$('#next-add-people').click(function(){
+		team.setName($("#team-name").val());
+		$('#add-team').hide();
+		renderTemplate("#persons","#personsTemplate",team);
+		$('#add-persons').show();
 	});
 	
-	$('.removeParent').live('click', function() {
-		var parentId = $(this).attr('id').split('_')[1];
-		parents.remove(parentId);
-		renderTemplate("#parents","#parentsTemplate",parents);
+	$('#back-add-team').live('click',function(){
+		console.log('here');
+		$('#add-team').show();
+		$('#add-persons').hide();
+	});
+	
+	$('.removePerson').live('click', function() {
+		var personId = $(this).attr('id').split('_')[1];
+		team.remove(personId);
+		renderTemplate("#persons","#personsTemplate",team);
 	});
 	
 });

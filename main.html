@@ -8,51 +8,56 @@
 
 <body>
 	
-	<div id='add-parents'>
-		<div id='parent' class='entity'>
-			<label>Name:</label><input type='text' id='parent-name'/>
-			<label>Age:</label><input type='text' id="parent-age"/>
+	<div id='add-team'>
+		<h1>Welcome to the super amazing administration tool!</h1>
+		<h3>Team Creation</h3>
+		<div id='person' class='entity'>
+			<label>Team Name:</label><input type='text' id='team-name'/>
 		</div>
-		<input type='button' id='parent-create' value='create'>
-
-		<div id='parents'></div>
-		<input type='button' id='next' value='next'>
+		<input type='button' id='next-add-people' value='next'>
+	</div>
+	<div id='persons'></div>
     </div>
 		
-	<div id='add-children'>
-		children
-	<div>
-
 </body>
 
 
-<script id="parentsTemplate" type="text/html">
-	<table>
-		<tr>
-			<th>
-				Name
-			</th>
-			<th>
-				Age
-			</th>
-			<th>
-				&nbsp;
-			</th>
-		</tr>
-		{{each $data.list()}} 
-		<tr>
-			<td>
-				${$value.name}
-			</td>
-			<td>
-				${$value.age}
-			</td>
-			<td>
-				<input type='button' class='removeParent' value='remove' id='parent_${$value.id}'>
-			</td>
-		</tr>
-		{{/each}}
-	</table>
+<script id="personsTemplate" type="text/html">
+	<div id='add-persons'>
+		<h3>Add People to ${$data.getName()}</h3>
+		<div id='person' class='entity'>
+			<label>Name:</label><input type='text' id='person-name'/>
+			<label>Experience:</label><input type='text' id="person-experience"/>
+		</div>
+		<input type='button' id='person-add' value='add'>
+		<table>
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>
+					Experience
+				</th>
+				<th>
+					&nbsp;
+				</th>
+			</tr>
+			{{each $data.people()}} 
+			<tr>
+				<td>
+					${$value.getName()}
+				</td>
+				<td>
+					${$value.experience}
+				</td>
+				<td>
+					<input type='button' class='removePerson' value='remove' id='person_${$value.id}'>
+				</td>
+			</tr>
+			{{/each}}
+		</table>
+		<input type='button' id='back-add-team' value='back'>
+    </div>
 </script>
 
 </html>
