@@ -35,9 +35,9 @@ test('people should be set', function() {
 	
 });
 
-module('When removing a person from a team')
+module('When a team has team members added to it.');
 
-test('should remove person from team', function() {
+test('remove: should remove person from team', function() {
 
 	var person1 = Person('',0,1);
 	var person2 = Person('',1,2);
@@ -50,7 +50,7 @@ test('should remove person from team', function() {
 	
 });
 
-test('should add person to a team', function() {
+test('add: should add person to a team', function() {
 
 	var person1 = Person();
 	
@@ -61,7 +61,7 @@ test('should add person to a team', function() {
 	
 });
 
-test('total experience should be sum of all team members experience', function() {
+test('total experience: should be sum of all team members experience', function() {
 
 	var person1 = Person();
 	
@@ -70,6 +70,6 @@ test('total experience should be sum of all team members experience', function()
 	team.add(Person('',10,-1));
 	team.add(Person('',10,-1));
 	
-	equals(team.totalExperience().length,30);
+	equals(team.totalExperience(),30);
 	
 });
