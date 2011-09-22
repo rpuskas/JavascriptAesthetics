@@ -49,3 +49,27 @@ test('should remove person from team', function() {
 	equals(team.people()[0].id,2);
 	
 });
+
+test('should add person to a team', function() {
+
+	var person1 = Person();
+	
+	var team = Team();
+	team.add(person1);
+	
+	equals(team.people().length,1);
+	
+});
+
+test('total experience should be sum of all team members experience', function() {
+
+	var person1 = Person();
+	
+	var team = Team();
+	team.add(Person('',10,-1));
+	team.add(Person('',10,-1));
+	team.add(Person('',10,-1));
+	
+	equals(team.totalExperience().length,30);
+	
+});
