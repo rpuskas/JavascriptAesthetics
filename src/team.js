@@ -1,15 +1,15 @@
 function Person(name,experience,id){
-	var name = name || '- not entered -';
-	var experience = experience || 0; 
+	var _name = name || 'anonymous';
+	var _experience = experience || 0;
+	var _id = id || -1; 
 	return {
-		id: id,
-		name: name,
-		experience: experience,
+		id: _id,
+		name: _name,
+		experience: _experience,
 		
 		toString : function(){
-			return name + experience;
+			return _name + _experience;
 		}
-		
 	}
 };
 
